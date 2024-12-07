@@ -9,9 +9,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>customer-service</artifactId>
+    <artifactId>fraud-service</artifactId>
     <packaging>jar</packaging>
-    <name>customer-service</name>
+    <name>fraud-service</name>
 
     <properties>
 <!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
@@ -34,12 +34,4 @@
         </dependency>
 
     </dependencies>
-
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-    </repositories>
 </project>

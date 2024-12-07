@@ -15,6 +15,7 @@
 
   <modules>
     <module>customer-service</module>
+    <module>fraud-service</module>
   </modules>
 
   <properties>
@@ -72,4 +73,10 @@
     </pluginManagement>
   </build>
 
+  <repositories>
+    <repository>
+      <id>central</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+  </repositories>
 </project>
