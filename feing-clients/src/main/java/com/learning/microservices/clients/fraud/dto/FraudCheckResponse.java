@@ -1,4 +1,4 @@
-package com.learning.microservices.controller.dto;
+package com.learning.microservices.clients.fraud.dto;
 
 public record FraudCheckResponse(
         Boolean fraudster

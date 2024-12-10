@@ -1,7 +1,8 @@
 package com.learning.microservices.controller;
 
 
-import com.learning.microservices.controller.dto.FraudCheckResponse;
+import com.learning.microservices.clients.fraud.FraudServiceClient;
+import com.learning.microservices.clients.fraud.dto.FraudCheckResponse;
 import com.learning.microservices.service.FraudCheckHistoryService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/fraud-check")
+@RequestMapping(FraudServiceClient.PATH)
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class FraudCheckHistoryController {
+public class FraudCheckHistoryController implements FraudServiceClient {
     FraudCheckHistoryService service;
 
     @GetMapping(params = "customerId")

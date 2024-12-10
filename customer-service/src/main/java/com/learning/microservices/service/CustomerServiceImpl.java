@@ -1,14 +1,14 @@
 package com.learning.microservices.service;
 
+import com.learning.microservices.clients.fraud.FraudServiceClient;
+import com.learning.microservices.clients.fraud.dto.FraudCheckResponse;
 import com.learning.microservices.controller.dto.CustomerRequest;
 import com.learning.microservices.domain.Customer;
 import com.learning.microservices.repository.CustomerRepository;
-import com.learning.microservices.service.dto.FraudCheckResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 public class CustomerServiceImpl implements CustomerService {
     CustomerRepository repository;
     RestTemplate restTemplate;
+    FraudServiceClient fraudServiceClient;
 
     @Override
     public void save(CustomerRequest request) {
@@ -39,8 +40,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private boolean isFraudster(Customer customer) {
-        String urlTemplate = "http://fraud-service/api/v1/fraud-check?customerId=%s";
-        FraudCheckResponse response = restTemplate.getForObject(urlTemplate.formatted(customer.getId()), FraudCheckResponse.class);
+        FraudCheckResponse response = fraudServiceClient.isFraudster(customer.getId());
         return response.fraudster();
     }
+
+//    private boolean isFraudster(Customer customer) {
+//        String urlTemplate = "http://fraud-service/api/v1/fraud-check?customerId=%s";
+//        FraudCheckResponse response = restTemplate.getForObject(urlTemplate.formatted(customer.getId()), FraudCheckResponse.class);
+//        return response.fraudster();
+//    }
 }
