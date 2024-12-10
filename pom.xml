@@ -18,6 +18,7 @@
     <module>fraud-service</module>
     <module>eureka-server</module>
     <module>feing-clients</module>
+    <module>notification-service</module>
   </modules>
 
   <properties>

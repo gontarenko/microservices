@@ -2,6 +2,8 @@ package com.learning.microservices.service;
 
 import com.learning.microservices.clients.fraud.FraudServiceClient;
 import com.learning.microservices.clients.fraud.dto.FraudCheckResponse;
+import com.learning.microservices.clients.notification.NotificationClient;
+import com.learning.microservices.clients.notification.dto.SendNotificationRequest;
 import com.learning.microservices.controller.dto.CustomerRequest;
 import com.learning.microservices.domain.Customer;
 import com.learning.microservices.repository.CustomerRepository;
@@ -20,6 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerRepository repository;
     RestTemplate restTemplate;
     FraudServiceClient fraudServiceClient;
+    NotificationClient notificationClient;
 
     @Override
     public void save(CustomerRequest request) {
@@ -36,7 +39,8 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IllegalStateException("fraudster");
         }
 
-        // todo send notification
+        // todo make it async
+        notificationClient.send(new SendNotificationRequest(customer.getId(), customer.getEmail(), "nice!"));
     }
 
     private boolean isFraudster(Customer customer) {
