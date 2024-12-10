@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerServiceImpl implements CustomerService {
     CustomerRepository repository;
+    RestTemplate restTemplate;
 
     @Override
     public void save(CustomerRequest request) {
@@ -38,8 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private boolean isFraudster(Customer customer) {
-        RestTemplate restTemplate = new RestTemplate();
-        String urlTemplate = "http://localhost:8081/api/v1/fraud-check?customerId=%s";
+        String urlTemplate = "http://fraud-service/api/v1/fraud-check?customerId=%s";
         FraudCheckResponse response = restTemplate.getForObject(urlTemplate.formatted(customer.getId()), FraudCheckResponse.class);
         return response.fraudster();
     }
