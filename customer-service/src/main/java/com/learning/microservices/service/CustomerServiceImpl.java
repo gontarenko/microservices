@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerServiceImpl implements CustomerService {
     CustomerRepository repository;
-    RestTemplate restTemplate;
+//    RestTemplate restTemplate;
     FraudServiceClient fraudServiceClient;
     NotificationClient notificationClient;
 

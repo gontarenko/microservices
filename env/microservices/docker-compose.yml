@@ -30,6 +30,13 @@ services:
 #    networks:
 #      - postgres
 #    restart: unless-stopped
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    ports:
+      - "9411:9411" # 9411 — это стандартный порт для Zipkin
+    environment:
+      - STORAGE_TYPE=mem # Используем in-memory хранилище (по умолчанию)
 
 networks:
   postgres:

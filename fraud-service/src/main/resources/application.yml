@@ -24,3 +24,18 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
     preferIpAddress: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  tracing:
+#    propagation:
+#      type: W3C
+    enabled: true
+    sampling:
+      probability: 1.0 # 100% запросов трассируются
+  zipkin:
+    enabled: true
+    endpoint: http://zipkin:9411/api/v2/spans

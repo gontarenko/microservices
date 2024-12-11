@@ -28,6 +28,7 @@
     <spring.boot.maven.plugin.version>3.4.0</spring.boot.maven.plugin.version>
     <spring.boot.dependencies.version>3.4.0</spring.boot.dependencies.version>
     <spring.cloud.starter.parent.version>2024.0.0</spring.cloud.starter.parent.version>
+    <micrometer-tracing.version>1.4.0</micrometer-tracing.version>
   </properties>
 
   <dependencyManagement>
@@ -46,24 +47,47 @@
         <scope>import</scope>
         <type>pom</type>
       </dependency>
+<!--      <dependency>-->
+<!--        <groupId>io.micrometer</groupId>-->
+<!--        <artifactId>micrometer-tracing-bom</artifactId>-->
+<!--        <version>${micrometer-tracing.version}</version>-->
+<!--        <type>pom</type>-->
+<!--        <scope>import</scope>-->
+<!--      </dependency>-->
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-test</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+
+    <!-- tracing -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-tracing-bridge-brave</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.zipkin.reporter2</groupId>
+      <artifactId>zipkin-reporter-brave</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.github.openfeign</groupId>
+      <artifactId>feign-micrometer</artifactId>
+      <version>13.5</version>
     </dependency>
 
   </dependencies>
@@ -88,11 +112,4 @@
       </plugins>
     </pluginManagement>
   </build>
-
-  <repositories>
-    <repository>
-      <id>central</id>
-      <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
-  </repositories>
 </project>
