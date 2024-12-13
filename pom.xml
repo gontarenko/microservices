@@ -19,6 +19,7 @@
     <module>eureka-server</module>
     <module>feing-clients</module>
     <module>notification-service</module>
+    <module>api-gateway</module>
   </modules>
 
   <properties>
@@ -71,7 +72,7 @@
       <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
 
-    <!-- tracing -->
+    <!-- tracing + actuator -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
