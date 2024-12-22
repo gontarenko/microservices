@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-
     <parent>
         <groupId>com.learning.microservices</groupId>
         <artifactId>microservices</artifactId>
@@ -12,10 +11,6 @@
     <artifactId>customer-service</artifactId>
     <packaging>jar</packaging>
     <name>customer-service</name>
-
-    <properties>
-        <!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-    </properties>
 
     <dependencies>
 
@@ -56,6 +51,14 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin> <!-- используем настройку плагина из parent-pom pluginManagement-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
         <repository>
