@@ -1,0 +1,18 @@
+spring:
+  zipkin:
+    base-url: http://zipkin:9411
+  datasource:
+    url: jdbc:postgresql://postgres:5432/customer-service
+  rabbitmq:
+    addresses: rabbitmq_m:5672
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://eureka-server:8761/eureka}
+
+management:
+  zipkin:
+    enabled: true
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans

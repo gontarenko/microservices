@@ -1,4 +1,81 @@
 services:
+
+  # my services
+  eureka-server:
+    image: gontarenko/eureka-server:latest
+    container_name: eureka-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8761:8761" # "host:container" ports
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+
+  api-gateway:
+    image: gontarenko/api-gateway:latest
+    container_name: api-gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8083:8083"
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+      - eureka-server
+
+  customer-service:
+    image: gontarenko/customer-service:latest
+    container_name: customer-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres
+      - rabbitmq_m
+
+  fraud-service:
+    image: gontarenko/fraud-service:latest
+    container_name: fraud-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8081:8081"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres
+      - rabbitmq_m
+
+  notification-service:
+    image: gontarenko/notification-service:latest
+    container_name: notification-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8082:8082"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+      - postgres
+      - rabbitmq_m
+
+  # end my services
+
   postgres:
     container_name: postgres
     image: postgres
@@ -6,7 +83,7 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-#      PGDATA: /data/postgres
+    #      PGDATA: /data/postgres
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./volumes/postgres/data:/data/postgres
@@ -16,37 +93,43 @@ services:
       - postgres
     restart: unless-stopped
 
-#  pgadmin:
-#    container_name: pgadmin
-#    image: dpage/pgadmin4
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-#      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-#      PGADMIN_CONFIG_SERVER_MODE: 'False'
-#    volumes:
-#      - pgadmin:/var/lib/pgadmin
-#    ports:
-#      - "5050:80"
-#    networks:
-#      - postgres
-#    restart: unless-stopped
+  #  pgadmin:
+  #    container_name: pgadmin
+  #    image: dpage/pgadmin4
+  #    environment:
+  #      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+  #      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+  #      PGADMIN_CONFIG_SERVER_MODE: 'False'
+  #    volumes:
+  #      - pgadmin:/var/lib/pgadmin
+  #    ports:
+  #      - "5050:80"
+  #    networks:
+  #      - postgres
+  #    restart: unless-stopped
   zipkin:
     image: openzipkin/zipkin:latest
     container_name: zipkin
     ports:
       - "9411:9411" # 9411 — это стандартный порт для Zipkin
+    networks:
+      - spring
     environment:
       - STORAGE_TYPE=mem # Используем in-memory хранилище (по умолчанию)
 
-  rabbitmq:
+  rabbitmq_m:
     image: rabbitmq:4.0.5-management
-    container_name: rabbitmq_microservices
+    container_name: rabbitmq_m
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - spring
 
 networks:
   postgres:
+    driver: bridge
+  spring:
     driver: bridge
 
 volumes:
@@ -58,3 +141,8 @@ volumes:
 # http://localhost:15672 - rabbitmq (guest/guest)
 
 # todo не работает rabbitmq в zipkin
+
+# docker image rm gontarenko/api-gateway gontarenko/eureka-server gontarenko/customer-service gontarenko/customer-service gontarenko/fraud-service gontarenko/notification-service
+
+# mvn compile
+# mvn package -P build-docker-image

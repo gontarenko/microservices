@@ -1,0 +1,14 @@
+spring:
+  zipkin:
+    base-url: http://zipkin:9411
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://eureka-server:8761/eureka}
+
+management:
+  zipkin:
+    enabled: true
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
