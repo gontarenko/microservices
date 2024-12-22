@@ -22,14 +22,14 @@ public class NotificationServiceApp {
         SpringApplication.run(NotificationServiceApp.class, args);
     }
 
-    @Bean
-    CommandLineRunner commandLineRunner(RabbitMQMessageProducer producer, NotificationConfig notificationConfig) {
-        return args -> {
-            producer.publish(
-                    "foo",
-                    notificationConfig.getInternalExchange(),
-                    notificationConfig.getIntervalNotificationRouteingKey()
-            );
-        };
-    }
+//    @Bean
+//    CommandLineRunner commandLineRunner(RabbitMQMessageProducer producer, NotificationConfig notificationConfig) {
+//        return args -> {
+//            producer.publish(
+//                    "foo",
+//                    notificationConfig.getInternalExchange(),
+//                    notificationConfig.getIntervalNotificationRouteingKey()
+//            );
+//        };
+//    }
 }

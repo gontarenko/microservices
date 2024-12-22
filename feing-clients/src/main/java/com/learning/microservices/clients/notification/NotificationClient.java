@@ -1,6 +1,6 @@
 package com.learning.microservices.clients.notification;
 
-import com.learning.microservices.clients.notification.dto.SendNotificationRequest;
+import com.learning.microservices.clients.notification.dto.NotificationRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,5 +11,5 @@ public interface NotificationClient {
 
 
     @PostMapping
-    void send(@RequestBody SendNotificationRequest request);
+    void send(@RequestBody NotificationRequest request);
 }

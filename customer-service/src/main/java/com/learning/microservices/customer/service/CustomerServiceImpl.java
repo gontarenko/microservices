@@ -3,8 +3,7 @@ package com.learning.microservices.customer.service;
 import com.learning.microservices.amqp.RabbitMQMessageProducer;
 import com.learning.microservices.clients.fraud.FraudServiceClient;
 import com.learning.microservices.clients.fraud.dto.FraudCheckResponse;
-import com.learning.microservices.clients.notification.NotificationClient;
-import com.learning.microservices.clients.notification.dto.SendNotificationRequest;
+import com.learning.microservices.clients.notification.dto.NotificationRequest;
 import com.learning.microservices.customer.controller.dto.CustomerRequest;
 import com.learning.microservices.customer.domain.Customer;
 import com.learning.microservices.customer.repository.CustomerRepository;
@@ -41,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         rabbitMessageProducer.publish(
-                new SendNotificationRequest(customer.getId(), customer.getEmail(), "nice!"),
+                new NotificationRequest(customer.getId(), customer.getEmail(), "nice!"),
                 "internal.exchange",
                 "internal.notification.routing-key"
         );

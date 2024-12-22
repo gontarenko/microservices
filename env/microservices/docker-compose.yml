@@ -56,3 +56,5 @@ volumes:
 # http://localhost:8761/ - eureka
 # http://localhost:9411/zipkin - zipkin
 # http://localhost:15672 - rabbitmq (guest/guest)
+
+# todo не работает rabbitmq в zipkin

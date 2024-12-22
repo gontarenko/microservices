@@ -1,8 +1,8 @@
-package com.learning.microservices.service;
+package com.learning.microservices.notification.service;
 
-import com.learning.microservices.clients.notification.dto.SendNotificationRequest;
-import com.learning.microservices.domain.Notification;
-import com.learning.microservices.repository.NotificationRepository;
+import com.learning.microservices.clients.notification.dto.NotificationRequest;
+import com.learning.microservices.notification.domain.Notification;
+import com.learning.microservices.notification.repository.NotificationRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,7 +17,7 @@ public class NotificationServiceImpl implements NotificationService {
     NotificationRepository repository;
 
     @Override
-    public void send(SendNotificationRequest request) {
+    public void send(NotificationRequest request) {
         repository.save(new Notification(
                 request.toCustomerId(),
                 request.toCustomerEmail(),

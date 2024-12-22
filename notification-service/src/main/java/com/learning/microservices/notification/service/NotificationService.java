@@ -1,7 +1,7 @@
-package com.learning.microservices.service;
+package com.learning.microservices.notification.service;
 
-import com.learning.microservices.clients.notification.dto.SendNotificationRequest;
+import com.learning.microservices.clients.notification.dto.NotificationRequest;
 
 public interface NotificationService {
-    void send(SendNotificationRequest request);
+    void send(NotificationRequest request);
 }

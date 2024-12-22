@@ -1,6 +1,6 @@
 package com.learning.microservices.clients.notification.dto;
 
-public record SendNotificationRequest(
+public record NotificationRequest(
         Integer toCustomerId,
         String toCustomerEmail,
         String message

@@ -1,4 +1,4 @@
-package com.learning.microservices.domain;
+package com.learning.microservices.notification.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
