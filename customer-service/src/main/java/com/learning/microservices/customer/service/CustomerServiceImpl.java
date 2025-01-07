@@ -13,6 +13,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Primary
 @Service
 @RequiredArgsConstructor
@@ -45,6 +47,12 @@ public class CustomerServiceImpl implements CustomerService {
                 "internal.notification.routing-key"
         );
 //        notificationClient.send(new SendNotificationRequest(customer.getId(), customer.getEmail(), "nice!"));
+    }
+
+    @Override
+    public List<Customer> getAll() {
+        List<Customer> customers = repository.findAll();
+        return customers;
     }
 
     private boolean isFraudster(Customer customer) {
