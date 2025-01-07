@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -27,19 +28,14 @@ public class CustomerController {
         customerService.save(request);
     }
 
-    @GetMapping("all")
+    @GetMapping
     public List<CustomerDto> getAll() {
-        //Получить всех пользователей из сервиса
-        //Смапить их в дто и отдать
-        List<Customer> customers = customerService.getAll();
-        List<CustomerDto> response = new ArrayList<>(customers.size());
-        for (Customer customer : customers) {
-            CustomerDto dto = new CustomerDto();
-            dto.setId(customer.getId());
-            dto.setEmail(customer.getEmail());
-            response.add(dto);
-        }
-        return response;
+        return customerService.getAll().stream()
+                .map(customer -> CustomerDto.builder()
+                        .id(customer.getId())
+                        .email(customer.getEmail())
+                        .build()
+                )
+                .toList();
     }
-
 }
