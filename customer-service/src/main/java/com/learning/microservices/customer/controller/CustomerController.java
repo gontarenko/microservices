@@ -2,6 +2,7 @@ package com.learning.microservices.customer.controller;
 
 import com.learning.microservices.customer.controller.dto.CustomerDto;
 import com.learning.microservices.customer.controller.dto.CustomerRequest;
+import com.learning.microservices.customer.controller.mapper.CustomerWebMapper;
 import com.learning.microservices.customer.domain.Customer;
 import com.learning.microservices.customer.service.CustomerService;
 import lombok.AccessLevel;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerController {
     CustomerService customerService;
+    CustomerWebMapper mapper;
 
     @PostMapping
     public void register(@RequestBody CustomerRequest request) {
@@ -30,12 +32,6 @@ public class CustomerController {
 
     @GetMapping
     public List<CustomerDto> getAll() {
-        return customerService.getAll().stream()
-                .map(customer -> CustomerDto.builder()
-                        .id(customer.getId())
-                        .email(customer.getEmail())
-                        .build()
-                )
-                .toList();
+        return mapper.dtos(customerService.getAll());
     }
 }
