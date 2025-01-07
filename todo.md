@@ -1,0 +1,4 @@
+- [ ] mappers (Mapstruct)
+- [ ] flyway
+- [ ] security
+ 
