@@ -25,14 +25,18 @@ public class CustomerServiceImpl implements CustomerService {
     FraudServiceClient fraudServiceClient;
 //    NotificationClient notificationClient;
     RabbitMQMessageProducer rabbitMessageProducer;
+    // todo create and inject new CustomerMapper
 
     @Override
     public void save(CustomerRequest request) {
+        // todo create empty Customer
+        // todo update empty Customer via new CustomerMapper (dont update id)
         Customer customer = Customer.builder()
                 .firstName(request.firstName())
                 .lastName(request.lastName())
                 .email(request.email())
                 .build();
+
         // todo email validation
         // todo email not taken
 
