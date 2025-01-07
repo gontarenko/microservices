@@ -51,8 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> getAll() {
-        List<Customer> customers = repository.findAll();
-        return customers;
+        return repository.findAll();
     }
 
     private boolean isFraudster(Customer customer) {
