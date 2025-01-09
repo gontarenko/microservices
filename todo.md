@@ -3,7 +3,7 @@ Todos:
 - [ ] add flyway
 - [ ] add new business process (customer controller -> fraud -> notification) / add new queue
 - [ ] add OpenAPI (Swagger)
-- [ ] add Unit + IT tests
+- [ ] add Unit + IT tests (testcontainers)
 - [ ] add security
  
 Почитать:
