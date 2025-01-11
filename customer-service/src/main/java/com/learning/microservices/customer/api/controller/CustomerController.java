@@ -1,9 +1,8 @@
-package com.learning.microservices.customer.controller;
+package com.learning.microservices.customer.api.controller;
 
-import com.learning.microservices.customer.controller.dto.CustomerDto;
-import com.learning.microservices.customer.controller.dto.CustomerRequest;
-import com.learning.microservices.customer.controller.mapper.CustomerWebMapper;
-import com.learning.microservices.customer.domain.Customer;
+import com.learning.microservices.customer.api.dto.CustomerRegistatrationDto;
+import com.learning.microservices.customer.api.dto.CustomerWebDto;
+import com.learning.microservices.customer.api.mapper.CustomerWebMapper;
 import com.learning.microservices.customer.service.CustomerService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +10,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -25,13 +22,13 @@ public class CustomerController {
     CustomerWebMapper mapper;
 
     @PostMapping
-    public void register(@RequestBody CustomerRequest request) {
+    public void register(@RequestBody CustomerRegistatrationDto request) {
         log.info("new customer registration {}", request);
         customerService.save(request);
     }
 
     @GetMapping
-    public List<CustomerDto> getAll() {
+    public List<CustomerWebDto> getAll() {
         return mapper.dtos(customerService.getAll());
     }
 }
