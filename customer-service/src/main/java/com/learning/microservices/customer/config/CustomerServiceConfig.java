@@ -1,4 +1,4 @@
-package com.learning.microservices.customer;
+package com.learning.microservices.customer.config;
 
 import org.springframework.context.annotation.Configuration;
 

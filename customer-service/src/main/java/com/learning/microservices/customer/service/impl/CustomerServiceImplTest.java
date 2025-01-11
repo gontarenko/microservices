@@ -1,7 +1,8 @@
-package com.learning.microservices.customer.service;
+package com.learning.microservices.customer.service.impl;
 
-import com.learning.microservices.customer.controller.dto.CustomerRequest;
-import com.learning.microservices.customer.domain.Customer;
+import com.learning.microservices.customer.api.dto.CustomerRegistatrationDto;
+import com.learning.microservices.customer.service.CustomerService;
+import com.learning.microservices.customer.store.entity.Customer;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -15,10 +16,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CustomerServiceImpl2 implements CustomerService {
+public class CustomerServiceImplTest implements CustomerService {
 
     @Override
-    public void save(CustomerRequest request) {
+    public void save(CustomerRegistatrationDto request) {
         throw new RuntimeException("not implemented");
     }
 
