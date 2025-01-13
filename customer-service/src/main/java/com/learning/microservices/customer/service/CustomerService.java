@@ -1,12 +1,12 @@
 package com.learning.microservices.customer.service;
 
-import com.learning.microservices.customer.api.dto.CustomerRegistatrationDto;
-import com.learning.microservices.customer.store.entity.Customer;
+import com.learning.microservices.customer.api.dto.CustomerRequest;
+import com.learning.microservices.customer.domain.entity.Customer;
 
 import java.util.List;
 
 public interface CustomerService {
-    void save(CustomerRegistatrationDto request);
+    void save(CustomerRequest request);
 
     List<Customer> getAll();
 }

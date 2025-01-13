@@ -1,4 +1,4 @@
-package com.learning.microservices.customer.store.entity;
+package com.learning.microservices.customer.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -25,5 +25,9 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }

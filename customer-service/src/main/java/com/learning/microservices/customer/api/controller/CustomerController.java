@@ -1,6 +1,6 @@
 package com.learning.microservices.customer.api.controller;
 
-import com.learning.microservices.customer.api.dto.CustomerRegistatrationDto;
+import com.learning.microservices.customer.api.dto.CustomerRequest;
 import com.learning.microservices.customer.api.dto.CustomerWebDto;
 import com.learning.microservices.customer.api.mapper.CustomerWebMapper;
 import com.learning.microservices.customer.service.CustomerService;
@@ -22,7 +22,7 @@ public class CustomerController {
     CustomerWebMapper mapper;
 
     @PostMapping
-    public void register(@RequestBody CustomerRegistatrationDto request) {
+    public void register(@RequestBody CustomerRequest request) {
         log.info("new customer registration {}", request);
         customerService.save(request);
     }

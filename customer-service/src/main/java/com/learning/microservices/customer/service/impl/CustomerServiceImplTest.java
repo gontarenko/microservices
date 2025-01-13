@@ -1,8 +1,8 @@
 package com.learning.microservices.customer.service.impl;
 
-import com.learning.microservices.customer.api.dto.CustomerRegistatrationDto;
+import com.learning.microservices.customer.api.dto.CustomerRequest;
+import com.learning.microservices.customer.domain.entity.Customer;
 import com.learning.microservices.customer.service.CustomerService;
-import com.learning.microservices.customer.store.entity.Customer;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +19,7 @@ import java.util.List;
 public class CustomerServiceImplTest implements CustomerService {
 
     @Override
-    public void save(CustomerRegistatrationDto request) {
+    public void save(CustomerRequest request) {
         throw new RuntimeException("not implemented");
     }
 
