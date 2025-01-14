@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CustomerWebDto {
+public class CustomerDto {
     Integer id;
     String email;
     String fullName;

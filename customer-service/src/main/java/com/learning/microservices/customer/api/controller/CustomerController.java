@@ -1,7 +1,7 @@
 package com.learning.microservices.customer.api.controller;
 
 import com.learning.microservices.customer.api.dto.CustomerRequest;
-import com.learning.microservices.customer.api.dto.CustomerWebDto;
+import com.learning.microservices.customer.api.dto.CustomerDto;
 import com.learning.microservices.customer.api.mapper.CustomerWebMapper;
 import com.learning.microservices.customer.service.CustomerService;
 import lombok.AccessLevel;
@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<CustomerWebDto> getAll() {
+    public List<CustomerDto> getAll() {
         return mapper.dtos(customerService.getAll());
     }
 }
