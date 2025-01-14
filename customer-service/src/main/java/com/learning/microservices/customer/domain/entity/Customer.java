@@ -1,4 +1,4 @@
-package com.learning.microservices.customer.domain;
+package com.learning.microservices.customer.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -13,7 +13,6 @@ public class Customer {
     @SequenceGenerator(name = "customer_id_seq", sequenceName = "customer_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_seq")
     private Integer id;
-
     private String firstName;
     private String lastName;
     private String email;
@@ -26,5 +25,9 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 }

@@ -1,7 +1,7 @@
 package com.learning.microservices.customer.service;
 
-import com.learning.microservices.customer.controller.dto.CustomerRequest;
-import com.learning.microservices.customer.domain.Customer;
+import com.learning.microservices.customer.api.dto.CustomerRequest;
+import com.learning.microservices.customer.domain.entity.Customer;
 
 import java.util.List;
 

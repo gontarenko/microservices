@@ -1,12 +1,14 @@
-package com.learning.microservices.customer.service;
+package com.learning.microservices.customer.service.impl;
 
 import com.learning.microservices.amqp.RabbitMQMessageProducer;
 import com.learning.microservices.clients.fraud.FraudServiceClient;
 import com.learning.microservices.clients.fraud.dto.FraudCheckResponse;
 import com.learning.microservices.clients.notification.dto.NotificationRequest;
-import com.learning.microservices.customer.controller.dto.CustomerRequest;
-import com.learning.microservices.customer.domain.Customer;
-import com.learning.microservices.customer.repository.CustomerRepository;
+import com.learning.microservices.customer.api.dto.CustomerRequest;
+import com.learning.microservices.customer.domain.entity.Customer;
+import com.learning.microservices.customer.domain.repository.CustomerRepository;
+import com.learning.microservices.customer.service.CustomerService;
+import com.learning.microservices.customer.service.mapper.CustomerMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,22 +23,16 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerServiceImpl implements CustomerService {
     CustomerRepository repository;
-//    RestTemplate restTemplate;
+    //    RestTemplate restTemplate;
     FraudServiceClient fraudServiceClient;
-//    NotificationClient notificationClient;
+    //    NotificationClient notificationClient;
     RabbitMQMessageProducer rabbitMessageProducer;
-    // todo create and inject new CustomerMapper
+    CustomerMapper mapper;
 
     @Override
     public void save(CustomerRequest request) {
-        // todo create empty Customer
-        // todo update empty Customer via new CustomerMapper (dont update id)
-        Customer customer = Customer.builder()
-                .firstName(request.firstName())
-                .lastName(request.lastName())
-                .email(request.email())
-                .build();
-
+        Customer customer = new Customer();
+        mapper.update(customer, request);
         // todo email validation
         // todo email not taken
 
