@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
         // todo email validation
         // todo email not taken
 
-        repository.saveAndFlush(customer);
+        customer = repository.saveAndFlush(customer);
         if (isFraudster(customer)) {
             throw new IllegalStateException("fraudster");
         }
