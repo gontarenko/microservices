@@ -1,9 +1,9 @@
 Todos:
-- [ ] add mappers (Mapstruct)
-- [ ] add flyway
+- [x] add mappers (Mapstruct)
+- [ ] add Unit + IT tests (testcontainers)
+- [ ] add flyway/liqudbase
 - [ ] add new business process (customer controller -> fraud -> notification) / add new queue
 - [ ] add OpenAPI (Swagger)
-- [ ] add Unit + IT tests (testcontainers)
 - [ ] add security
  
 Почитать:
