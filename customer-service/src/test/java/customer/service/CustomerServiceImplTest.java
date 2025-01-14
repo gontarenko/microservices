@@ -17,40 +17,28 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.verification.VerificationMode;
 import org.springframework.test.util.ReflectionTestUtils;
 
-//@AutoConfigureMockMvc
-//@SpringBootTest(classes = {CustomerServiceApp.class})
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceImplTest {
-    //    @MockitoBean
     @Mock
     CustomerRepository repository;
-
-    //    @MockitoBean
     @Mock
     FraudServiceClient fraudServiceClient;
-
-    //    @MockitoBean
     @Mock
     RabbitMQMessageProducer rabbitMessageProducer;
 
-    //    @Autowired
     @InjectMocks
     CustomerServiceImpl customerService;
 
-//    @Autowired
-//    CustomerMapper mapper;
-
+    private CustomerMapper mapper = new CustomerMapperImpl();
     private Customer customer;
-
     private Customer customerInput;
-
     private FraudCheckResponse response = new FraudCheckResponse(false);
-
     private NotificationRequest notificationRequest;
 
-    private CustomerMapper mapper = new CustomerMapperImpl(); // Создание экземпляра маппера
+    private VerificationMode verificationTimesOne = Mockito.times(1);
 
     @BeforeEach
     void setUp() {
@@ -66,16 +54,12 @@ public class CustomerServiceImplTest {
                 "Ivanov",
                 "Ivanov@ivanov.ru"
         );
-
         notificationRequest = new NotificationRequest(
                 customer.getId(),
                 customer.getEmail(),
                 "nice!"
         );
-        // Подставляем маппер в сервис через рефлексию, если он в конструкторе
         ReflectionTestUtils.setField(customerService, "mapper", mapper);
-
-
     }
 
     @Test
@@ -86,6 +70,7 @@ public class CustomerServiceImplTest {
                 "Ivanov",
                 "Ivanov@ivanov.ru"
         );
+
         // when
         Mockito.when(repository.saveAndFlush(customerInput))
                 .thenReturn(customer);
@@ -97,20 +82,12 @@ public class CustomerServiceImplTest {
                         "internal.exchange",
                         "internal.notification.routing-key"
                 );
+
         // then
         customerService.save(request);
-        Mockito.verify(
-                repository,
-                Mockito.times(1)
-        ).saveAndFlush(customerInput);
-        Mockito.verify(
-                fraudServiceClient,
-                Mockito.times(1)
-        ).isFraudster(customer.getId());
-        Mockito.verify(
-                rabbitMessageProducer,
-                Mockito.times(1)
-        ).publish(
+        Mockito.verify(repository, verificationTimesOne).saveAndFlush(customerInput);
+        Mockito.verify(fraudServiceClient, verificationTimesOne).isFraudster(customer.getId());
+        Mockito.verify(rabbitMessageProducer, verificationTimesOne).publish(
                 notificationRequest,
                 "internal.exchange",
                 "internal.notification.routing-key"
