@@ -6,6 +6,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://eureka-server:8761/eureka}
+    enabled: false
 
 management:
   zipkin:

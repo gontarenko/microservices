@@ -17,7 +17,7 @@ services:
     image: gontarenko/api-gateway:latest
     container_name: api-gateway
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=docker,eureka
     ports:
       - "8083:8083"
     networks:
@@ -30,7 +30,7 @@ services:
     image: gontarenko/customer-service:latest
     container_name: customer-service
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=docker,eureka
     ports:
       - "8080:8080"
     networks:
@@ -46,7 +46,7 @@ services:
     image: gontarenko/fraud-service:latest
     container_name: fraud-service
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=docker,eureka
     ports:
       - "8081:8081"
     networks:
@@ -62,7 +62,7 @@ services:
     image: gontarenko/notification-service:latest
     container_name: notification-service
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=docker,eureka
     ports:
       - "8082:8082"
     networks:
