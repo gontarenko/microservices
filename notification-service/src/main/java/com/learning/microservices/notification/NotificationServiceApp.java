@@ -1,17 +1,14 @@
 package com.learning.microservices.notification;
 
 import com.learning.microservices.amqp.RabbitMQConfig;
-import com.learning.microservices.amqp.RabbitMQMessageProducer;
-import com.learning.microservices.notification.config.NotificationConfig;
-import org.springframework.boot.CommandLineRunner;
+import com.learning.microservices.clients.config.FeignClientConfig;
+import com.learning.microservices.clients.config.FeignClientsDynamicPropertySourceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-//@Import(FeignTracingConfig.class)
-@Import(RabbitMQConfig.class)
+@Import({RabbitMQConfig.class, FeignClientsDynamicPropertySourceConfig.class, FeignClientConfig.class})
 @EnableFeignClients(
         basePackages = "com.learning.microservices.clients"
 )
