@@ -19,6 +19,9 @@ public class FeignClientsDynamicPropertySourceConfig {
             if ("default".equals(profile)) {
                 configurer.setLocation(new ClassPathResource("default.properties"));
                 return configurer;
+            } else if ("docker".equals(profile)) {
+                configurer.setLocation(new ClassPathResource("docker.properties"));
+                return configurer;
             } else if ("k8s".equals(profile)) {
                 configurer.setLocation(new ClassPathResource("k8s.properties"));
                 return configurer;

@@ -7,6 +7,7 @@ Todos:
 - [ ] add OpenAPI (Swagger)
 - [ ] add security
 - [ ] попытаться настроить feign client чтобы в еврике был не важен урл (FeignClientConfig)
+- [ ] не работает rabbitmq в zipkin
 
 Почитать:
 

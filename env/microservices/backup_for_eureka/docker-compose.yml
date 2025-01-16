@@ -1,12 +1,36 @@
 services:
 
   # my services
+  eureka-server:
+    image: gontarenko/eureka-server:latest
+    container_name: eureka-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8761:8761" # "host:container" ports
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+
+  api-gateway:
+    image: gontarenko/api-gateway:latest
+    container_name: api-gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker,eureka
+    ports:
+      - "8083:8083"
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+      - eureka-server
 
   customer-service:
     image: gontarenko/customer-service:latest
     container_name: customer-service
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=docker,eureka
     ports:
       - "8080:8080"
     networks:
@@ -14,6 +38,7 @@ services:
       - postgres
     depends_on:
       - zipkin
+      - eureka-server
       - postgres
       - rabbitmq_m
 
@@ -21,7 +46,7 @@ services:
     image: gontarenko/fraud-service:latest
     container_name: fraud-service
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=docker,eureka
     ports:
       - "8081:8081"
     networks:
@@ -29,6 +54,7 @@ services:
       - postgres
     depends_on:
       - zipkin
+      - eureka-server
       - postgres
       - rabbitmq_m
 
@@ -36,7 +62,7 @@ services:
     image: gontarenko/notification-service:latest
     container_name: notification-service
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=docker,eureka
     ports:
       - "8082:8082"
     networks:
@@ -44,6 +70,7 @@ services:
       - postgres
     depends_on:
       - zipkin
+      - eureka-server
       - postgres
       - rabbitmq_m
 
@@ -66,6 +93,20 @@ services:
       - postgres
     restart: unless-stopped
 
+  #  pgadmin:
+  #    container_name: pgadmin
+  #    image: dpage/pgadmin4
+  #    environment:
+  #      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+  #      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+  #      PGADMIN_CONFIG_SERVER_MODE: 'False'
+  #    volumes:
+  #      - pgadmin:/var/lib/pgadmin
+  #    ports:
+  #      - "5050:80"
+  #    networks:
+  #      - postgres
+  #    restart: unless-stopped
   zipkin:
     image: openzipkin/zipkin:latest
     container_name: zipkin
