@@ -27,4 +27,19 @@ public class CustomerServiceImplTest implements CustomerService {
     public List<Customer> getAll() {
         throw new RuntimeException("not implemented");
     }
+
+    @Override
+    public boolean existsById(Integer customerId) {
+        throw new RuntimeException("not implemented");
+    }
+
+    @Override
+    public void checkCustomerId(Integer id) {
+        throw new RuntimeException("not implemented");
+    }
+
+    @Override
+    public Customer findById(Integer customerId) {
+        throw new RuntimeException("not implemented");
+    }
 }
