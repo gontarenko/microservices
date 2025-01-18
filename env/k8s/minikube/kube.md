@@ -6,7 +6,7 @@
 
 `kubectl delete pod hello-world`
 
-
+`kubectl delete all --all` - удалить все поды и сервисы
 
 ### Postgres Pod (находиться в терминале в env/k8s/minikube)
 
