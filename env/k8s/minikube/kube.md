@@ -1,32 +1,46 @@
-kubectl run hello-world --image=amigoscode/kubernetes:hello-world --port=80
+`kubectl run hello-world --image=amigoscode/kubernetes:hello-world --port=80`
 
-kubectl get pods
+`kubectl get pods`
 
-kubectl port-forward pod/hello-world 8080:80
+`kubectl port-forward pod/hello-world 8080:80`
 
-kubectl delete pod hello-world
+`kubectl delete pod hello-world`
 
 
 
 ### Postgres Pod (находиться в терминале в env/k8s/minikube)
 
-- kubectl apply -f bootstrap/postgres
-- kubectl describe pod postgres-0
-- kubectl logs postgres-0
-- kubectl exec -it postgres-0 -- psql -U postgres
+- `kubectl apply -f bootstrap/postgres`
+- `kubectl describe pod postgres-0`
+- `kubectl logs postgres-0`
+- `kubectl exec -it postgres-0 -- psql -U postgres`
+
+`\l` - список бд
+`\c databasename` - коннект к бд
+`\dt` - список таблиц
+`\q` - выйти
 
 ### rabbitmq
-kubectl apply -f bootstrap/rabbitmq
+`kubectl apply -f bootstrap/rabbitmq`
 
 ### zipkin
-kubectl apply -f bootstrap/zipkin
+`kubectl apply -f bootstrap/zipkin`
 
 ## всякие комманды
 
 Получить всю инфу о подах, сервисах и тд:
-- kubectl get all
-
+- `kubectl get all`
+- `kubectl get svc` - получить все запущенные сервисы
+- `kubectl logs pods-name`
 
 Получить доступ к сервису в кубере:
-- minikube service --url rabbitmq 
-- minikube tunnel (можно обратиться по порту указаному в kubectl get services)
+- `minikube service --url rabbitmq `
+- `minikube tunnel` (можно обратиться по порту указаному в kubectl get services)
+
+
+## Старт сервисов
+
+`kubectl apply -f env/k8s/minikube/services/cutomer/`
+`kubectl apply -f env/k8s/minikube/services/fraud/`
+`kubectl apply -f env/k8s/minikube/services/notification/`
+
