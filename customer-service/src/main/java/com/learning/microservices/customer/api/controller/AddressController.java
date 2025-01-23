@@ -8,6 +8,9 @@ import com.learning.microservices.customer.domain.entity.Address;
 import com.learning.microservices.customer.domain.entity.Customer;
 import com.learning.microservices.customer.service.AddressService;
 import com.learning.microservices.customer.service.CustomerService;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,28 +26,21 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/address")
+@RequestMapping("api/v1/addresses")
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AddressController {
-    private final AddressService service;
-    private final AddressWebMapper mapper;
-    private final CustomerService customerService;
-    @Autowired
-    public AddressController(AddressService addressService, AddressWebMapper mapper, CustomerService customerService) {
-        this.service = addressService;
-        this.mapper = mapper;
-        this.customerService = customerService;
-    }
+    AddressService service;
+    AddressWebMapper mapper;
+    CustomerService customerService;
 
     @PostMapping
     public void create(@RequestBody AddressRequest request) {
-        Integer customerId = request.customerId();
-        customerService.checkCustomerId(customerId);
         log.info("Add new address registration {}", request);
-        Customer customer = customerService.findById(customerId);
-        service.save(request, customer);
+        service.save(request, request.customerId());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable(value = "id") Integer id) {
         service.deleteById(id);
         log.info("Address with ID {} was deleted successfully", id);
@@ -55,13 +51,13 @@ public class AddressController {
         return mapper.dtos(service.getAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public AddressDto findById(@PathVariable(value = "id") Integer id) {
         Address address = service.findById(id);
         return mapper.dto(address);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public void update(@PathVariable(value = "id") Integer id, @RequestBody AddressRequest request) {
         service.updateById(id, request);
     }

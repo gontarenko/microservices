@@ -7,7 +7,7 @@ import com.learning.microservices.customer.domain.entity.Customer;
 import java.util.List;
 
 public interface AddressService {
-    void save(AddressRequest request, Customer customer);
+    void save(AddressRequest request, Integer customerId);
 
     List<Address> getAll();
 

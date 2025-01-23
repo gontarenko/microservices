@@ -35,7 +35,11 @@ public class AddressServiceImpl implements AddressService {
 
 
     @Override
-    public void save(AddressRequest request, Customer customer) {
+    public void save(AddressRequest request, Integer customerId) {
+        Integer id = request.customerId();
+        customerService.checkCustomerId(id);
+        Customer customer = customerService.findById(id);
+
         Address address = new Address();
         mapper.update(address, request, customer);
         log.info("Create address: {}", address);

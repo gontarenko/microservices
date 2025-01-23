@@ -34,7 +34,7 @@ public class CustomerController {
         service.save(request);
     }
 
-    @GetMapping("/{id}/address")
+    @GetMapping("{id}/address")
     public ResponseEntity<List<AddressDto>> getAddresses(@PathVariable(value = "id") Integer id) {
         service.checkCustomerId(id);
         log.info("Addresses of customer_id {}:", id);
