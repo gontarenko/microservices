@@ -46,13 +46,15 @@ public class CustomerServiceImplTest {
                 1,
                 "Ivan",
                 "Ivanov",
-                "Ivanov@ivanov.ru"
+                "Ivanov@ivanov.ru",
+                null
         );
         customerInput = new Customer(
                 null,
                 "Ivan",
                 "Ivanov",
-                "Ivanov@ivanov.ru"
+                "Ivanov@ivanov.ru",
+                null
         );
         notificationRequest = new NotificationRequest(
                 customer.getId(),

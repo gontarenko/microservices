@@ -10,5 +10,6 @@ import org.mapstruct.MappingTarget;
 public interface CustomerMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "addresses", ignore = true)
     void update(@MappingTarget Customer customer, CustomerRequest customerRequest);
 }

@@ -9,4 +9,10 @@ public interface CustomerService {
     void save(CustomerRequest request);
 
     List<Customer> getAll();
+
+    boolean existsById(Integer customerId);
+
+    void checkCustomerId(Integer id);
+
+    Customer findById(Integer customerId);
 }
