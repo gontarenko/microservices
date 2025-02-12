@@ -28,8 +28,8 @@ public class FeignClientsDynamicPropertySourceConfig {
             }
         }
 
-        throw new IllegalStateException("No default profile found in environment property sources");
+//        throw new IllegalStateException("No default profile found in environment property sources");
 //        configurer.setIgnoreResourceNotFound(true);
-//        return configurer;
+        return configurer;
     }
 }
