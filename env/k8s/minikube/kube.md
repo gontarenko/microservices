@@ -20,6 +20,8 @@
 `\dt` - список таблиц
 `\q` - выйти
 
+`kubectl port-forward pod/postgres-0 5432:5432`
+
 ### rabbitmq
 `kubectl apply -f bootstrap/rabbitmq`
 
