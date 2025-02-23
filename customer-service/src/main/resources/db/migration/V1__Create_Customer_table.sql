@@ -1,8 +1,16 @@
-CREATE SEQUENCE IF NOT EXISTS customer_id_seq;
+create sequence customer_id_seq
+    start with 1
+    increment by 1
+    no minvalue
+    maxvalue 2147483647
+    cache 1;
 
-CREATE TABLE IF NOT EXISTS customer (
-    id INTEGER PRIMARY KEY DEFAULT nextval('customer_id_seq'),
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE
+create table customer (
+    id integer not null default nextval('customer_id_seq'),
+    first_name varchar(255),
+    last_name varchar(255),
+    email varchar(255),
+    primary key (id)
 );
+
+alter sequence customer_id_seq owned by customer.id;

@@ -30,7 +30,6 @@
         <micrometer-tracing.version>1.4.0</micrometer-tracing.version>
         <image>gontarenko/${project.artifactId}:${project.version}</image>
         <lombok.version>1.18.36</lombok.version>
-        <flyway.version>11.3.1</flyway.version>
         <mapstruct.version>1.6.3</mapstruct.version>
     </properties>
 
@@ -132,16 +131,6 @@
             <artifactId>spring-boot-test-autoconfigure</artifactId>
             <version>3.4.1</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-database-postgresql</artifactId>
-            <version>${flyway.version}</version>
         </dependency>
     </dependencies>
 
